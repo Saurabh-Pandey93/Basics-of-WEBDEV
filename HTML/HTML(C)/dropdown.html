@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/server">
+        <div>
+        <input type="checkbox" id="age" name="age"/>
+        <label for="age"> I am 18+</label>
+        <button>submit</button>
+        </div>
+        <div>
+            Choose your Profession
+            <select name="Profession" id="profession">
+            <option value="stu">Student</option>
+            <option value="tea">Teacher</option>
+            <option value="dev">Developer</option>
+        </select>
+        </div>
+        <label for="vol"> Select your volume level :</label>
+        <input type="range" id="vol" min="0" max="100" name="vol" step="10" value="18"/>
+        <br/>
+
+        <label for="feedback">Please give your valuable feedback:</label>
+        <textarea id="feedback"></textarea>
+        <button>Submit</button>
+    </form>
+</body>
+</html>

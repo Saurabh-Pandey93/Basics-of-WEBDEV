@@ -1,0 +1,9 @@
+div{
+    width: 400px;
+    height: 200px;
+    background-color: #7aa87a;
+    margin: 10px auto;
+    background-image: url("virat.jpg");
+    background-size: contain;
+    color: white;
+}

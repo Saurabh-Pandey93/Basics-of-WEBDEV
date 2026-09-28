@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Remote Classroom - "Aviskari Nexus"</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #1e3c72, #a8e063); /* lighter green */
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #fff;
+            padding: 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(30,60,114,0.08);
+            position: relative;
+        }
+        .animated-bg {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(90deg, #a8e063 0%, #f4f8fb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .study-animation {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .main-title {
+            font-size: 2.5em;
+            color: #1e3c72;
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            padding: 12px 24px;
+            display: inline-block;
+            margin-top: 40px;
+        }
+        .subtitle {
+            color: #444;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            padding: 6px 18px;
+            display: inline-block;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: #2a5298;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: bold;
+            font-size: 1em;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #56ab2f;
+        }
+        .section {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(30,60,114,0.10);
+            padding: 35px 30px;
+        }
+        .section h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .feature-card {
+            flex: 1 1 220px;
+            background: linear-gradient(135deg, #a8e063 60%, #eaf8d2 100%);
+            color: #222;
+            border-radius: 12px;
+            padding: 18px 15px;
+            box-shadow: 0 2px 8px rgba(56,171,47,0.10);
+            text-align: center;
+            font-size: 1.05em;
+        }
+        .feature-card span {
+            font-size: 2em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .team-list {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .team-member {
+            flex: 1 1 180px;
+            background: #f4f4f4;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(30,60,114,0.07);
+        }
+        .team-member img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+        }
+        .contact-form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 350px;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+        .contact-form button {
+            padding: 12px;
+            background: linear-gradient(90deg, #a8e063, #eaf8d2);
+            color: #222;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .contact-form button:hover {
+            background: #1e3c72;
+            color: #fff;
+        }
+        .ncert-classes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .class-card {
+            background: linear-gradient(135deg, #a8e063 60%, #eaf8d2 100%);
+            color: #222;
+            border-radius: 12px;
+            padding: 18px 15px;
+            box-shadow: 0 2px 8px rgba(56,171,47,0.10);
+            text-align: center;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 140px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .class-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(56,171,47,0.18);
+        }
+        .class-details {
+            display: none;
+            background: #fff;
+            color: #222;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+            margin: 18px auto 0 auto;
+            padding: 18px 14px;
+            max-width: 600px;
+            text-align: left;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .subject-title {
+            font-weight: bold;
+            color: #1e3c72;
+            margin-top: 10px;
+        }
+        .close-btn {
+            float: right;
+            background: #a8e063;
+            color: #222;
+            border: none;
+            border-radius: 6px;
+            padding: 4px 12px;
+            cursor: pointer;
+            font-size: 0.95em;
+            margin-top: -8px;
+        }
+        footer {
+            text-align: center;
+            color: #fff;
+            background: #1e3c72;
+            padding: 18px 0;
+            margin-top: 40px;
+            font-size: 1em;
+        }
+        @media (max-width: 700px) {
+            .features-list, .team-list {
+                flex-direction: column;
+                gap: 18px;
+            }
+            .section {
+                padding: 20px 10px;
+            }
+            .ncert-classes {
+                flex-direction: column;
+                gap: 14px;
+                align-items: center;
+            }
+            .class-details {
+                max-width: 98vw;
+            }
+            .main-title {
+                font-size: 1.5em;
+                padding: 8px 10px;
+            }
+            .animated-bg {
+                height: 140px;
+            }
+            .study-animation {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="animated-bg">
+            <!-- Animated SVG Study Material -->
+            <svg class="study-animation" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="90" cy="160" rx="60" ry="12" fill="#eaf8d2">
+                    <animate attributeName="rx" values="60;65;60" dur="2s" repeatCount="indefinite"/>
+                </ellipse>
+                <rect x="50" y="60" width="80" height="60" rx="12" fill="#fff" stroke="#a8e063" stroke-width="3"/>
+                <rect x="65" y="75" width="50" height="8" rx="4" fill="#a8e063">
+                    <animate attributeName="width" values="50;70;50" dur="2s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="65" y="90" width="40" height="8" rx="4" fill="#a8e063">
+                    <animate attributeName="width" values="40;60;40" dur="2s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="65" y="105" width="30" height="8" rx="4" fill="#a8e063">
+                    <animate attributeName="width" values="30;50;30" dur="2s" repeatCount="indefinite"/>
+                </rect>
+                <circle cx="140" cy="70" r="10" fill="#a8e063">
+                    <animate attributeName="cy" values="70;80;70" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <rect x="55" y="50" width="70" height="10" rx="5" fill="#a8e063">
+                    <animate attributeName="width" values="70;90;70" dur="2s" repeatCount="indefinite"/>
+                </rect>
+            </svg>
+            <div class="main-title">
+                Aviskari Nexus classroom for rural collages
+            </div>
+        </div>
+        <div class="subtitle">Empowering Rural Colleges for Innovation & Collaboration</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#ncert">NCERT Classes</a>
+            <a href="#team">Team</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="section" id="about">
+        <h2>About</h2>
+        <p>
+            Welcome to our Aviskari Nexus classroom for rural collages!<br>
+            Here, everyone can learn, share ideas, and work together easily.<br>
+            Let’s help each other and grow together.
+        </p>
+    </section>
+
+    <section class="section" id="features">
+        <h2>Features</h2>
+        <div class="features-list">
+            <div class="feature-card">
+                <span>💡</span>
+                <strong>Idea Sharing & Collaboration</strong>
+                <div>Share your thoughts and work together with friends and teachers. Everyone’s ideas matter!</div>
+            </div>
+            <div class="feature-card">
+                <span>🧑‍💻</span>
+                <strong>Live Coding Sessions</strong>
+                <div>Learn coding by joining live classes. Ask questions and get help instantly.</div>
+            </div>
+            <div class="feature-card">
+                <span>🤝</span>
+                <strong>Teamwork & Mentorship</strong>
+                <div>Form groups, help each other, and get guidance from mentors for better learning.</div>
+            </div>
+            <div class="feature-card">
+                <span>📚</span>
+                <strong>Study Materials & Resources</strong>
+                <div>Access notes, books, and videos anytime to make your studies easier.</div>
+            </div>
+            <div class="feature-card">
+                <span>📝</span>
+                <strong>Assignment Submission</strong>
+                <div>Complete your homework and submit it online without any hassle.</div>
+            </div>
+            <div class="feature-card">
+                <span>💬</span>
+                <strong>Discussion Forum</strong>
+                <div>Ask questions, clear doubts, and talk with classmates and teachers.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="ncert">
+        <h2>NCERT Classes (6th to 12th)</h2>
+        <div class="ncert-classes">
+            <div class="class-card" onclick="showDetails(6)">Class 6</div>
+            <div class="class-card" onclick="showDetails(7)">Class 7</div>
+            <div class="class-card" onclick="showDetails(8)">Class 8</div>
+            <div class="class-card" onclick="showDetails(9)">Class 9</div>
+            <div class="class-card" onclick="showDetails(10)">Class 10</div>
+            <div class="class-card" onclick="showDetails(11)">Class 11</div>
+            <div class="class-card" onclick="showDetails(12)">Class 12</div>
+        </div>
+        <div id="class-details-6" class="class-details">
+            <button class="close-btn" onclick="closeDetails(6)">Close</button>
+            <div class="subject-title">Maths</div>
+            <ul>
+                <li>Fractions</li>
+                <li>Decimals</li>
+                <li>Geometry</li>
+            </ul>
+            <div class="subject-title">Science</div>
+            <ul>
+                <li>Food</li>
+                <li>Materials</li>
+                <li>Living World</li>
+            </ul>
+            <div class="subject-title">English</div>
+            <ul>
+                <li>Grammar</li>
+                <li>Comprehension</li>
+                <li>Writing Skills</li>
+            </ul>
+        </div>
+        <div id="class-details-7" class="class-details">
+            <button class="close-btn" onclick="closeDetails(7)">Close</button>
+            <div class="subject-title">Maths</div>
+            <ul>
+                <li>Algebra</li>
+                <li>Ratio & Proportion</li>
+            </ul>
+            <div class="subject-title">Science</div>
+            <ul>
+                <li>Nutrition</li>
+                <li>Heat</li>
+                <li>Acids & Bases</li>
+            </ul>
+            <div class="subject-title">English</div>
+            <ul>
+                <li>Grammar</li>
+                <li>Comprehension</li>
+                <li>Writing Skills</li>
+            </ul>
+        </div>
+        <div id="class-details-8" class="class-details">
+            <button class="close-btn" onclick="closeDetails(8)">Close</button>
+            <div class="subject-title">Maths</div>
+            <ul>
+                <li>Linear Equations</li>
+                <li>Mensuration</li>
+            </ul>
+            <div class="subject-title">Science</div>
+            <ul>
+                <li>Microorganisms</li>
+                <li>Force & Pressure</li>
+            </ul>
+            <div class="subject-title">English</div>
+            <ul>
+                <li>Grammar</li>
+                <li>Comprehension</li>
+                <li>Writing Skills</li>
+            </ul>
+        </div>
+        <div id="class-details-9" class="class-details">
+            <button class="close-btn" onclick="closeDetails(9)">Close</button>
+            <div class="subject-title">Maths</div>
+            <ul>
+                <li>Polynomials</li>
+                <li>Triangles</li>
+            </ul>
+            <div class="subject-title">Science</div>
+            <ul>
+                <li>Matter</li>
+                <li>Motion</li>
+                <li>Cell Structure</li>
+            </ul>
+            <div class="subject-title">English</div>
+            <ul>
+                <li>Literature</li>
+                <li>Poetry</li>
+                <li>Essay Writing</li>
+            </ul>
+        </div>
+        <div id="class-details-10" class="class-details">
+            <button class="close-btn" onclick="closeDetails(10)">Close</button>
+            <div class="subject-title">Maths</div>
+            <ul>
+                <li>Quadratic Equations</li>
+                <li>Circles</li>
+            </ul>
+            <div class="subject-title">Science</div>
+            <ul>
+                <li>Chemical Reactions</li>
+                <li>Genetics</li>
+            </ul>
+            <div class="subject-title">English</div>
+            <ul>
+                <li>Literature</li>
+                <li>Poetry</li>
+                <li>Essay Writing</li>
+            </ul>
+        </div>
+        <div id="class-details-11" class="class-details">
+            <button class="close-btn" onclick="closeDetails(11)">Close</button>
+            <div class="subject-title">Maths</div>
+            <ul>
+                <li>Sets</li>
+                <li>Trigonometry</li>
+            </ul>
+            <div class="subject-title">Science</div>
+            <ul>
+                <li>Physics (Mechanics)</li>
+                <li>Chemistry (Atoms)</li>
+                <li>Biology (Plant Physiology)</li>
+            </ul>
+            <div class="subject-title">English</div>
+            <ul>
+                <li>Advanced Grammar</li>
+                <li>Novel Study</li>
+                <li>Report Writing</li>
+            </ul>
+        </div>
+        <div id="class-details-12" class="class-details">
+            <button class="close-btn" onclick="closeDetails(12)">Close</button>
+            <div class="subject-title">Maths</div>
+            <ul>
+                <li>Calculus</li>
+                <li>Probability</li>
+            </ul>
+            <div class="subject-title">Science</div>
+            <ul>
+                <li>Physics (Electrostatics)</li>
+                <li>Chemistry (Polymers)</li>
+                <li>Biology (Genetics)</li>
+            </ul>
+            <div class="subject-title">English</div>
+            <ul>
+                <li>Advanced Grammar</li>
+                <li>Novel Study</li>
+                <li>Report Writing</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section" id="team">
+        <h2>Our Team</h2>
+        <div class="team-list">
+            <div class="team-member">
+                <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Team Member">
+                <div>Saurabh Pandey</div>
+                <div> Team Leader </div>
+            </div>
+            <div class="team-member">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member">
+                <div>Prashant Kumar Sharma</div>
+                <div>Lead Developer</div>
+            </div>
+            <div class="team-member">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Team Member">
+                <div>Himanshi Sharma</div>
+                <div>Quality Analyst </div>
+            </div>
+            <div class="team-member">
+                <img src="https://static.vecteezy.com/system/resources/previews/022/034/191/original/character-high-school-student-in-school-uniform-png.png" alt="Team Member">
+                <div>Abhayjeet Kumar</div>
+                <div> Developer</div>
+            </div>
+            <div class="team-member">
+                <img src="https://static.vecteezy.com/system/resources/previews/021/730/192/original/character-high-school-student-in-school-uniform-png.png" alt="Team Member">
+                <div> Vikhyat Srivastava </div>
+                <div> UX/UI Designer </div>
+            </div>
+            <div class="team-member">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.KJrCUpHOsq7AyNUu6tZlRgHaHa?r=0&cb=thfc1&w=2500&h=2500&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Team Member">
+                <div> Ratan Gupta </div>
+                <div> content writer</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+        <form class="contact-form" onsubmit="showThanks(event)">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="3" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="thanks-message" style="color:#1e3c72; font-weight:bold; margin-top:10px;"></div>
+    </section>
+
+    <script>
+        function showThanks(e) {
+            e.preventDefault();
+            document.getElementById('thanks-message').textContent = "Thank you for contacting us! We'll get back to you soon.";
+        }
+        function showDetails(classNum) {
+            for(let i=6; i<=12; i++) {
+                var el = document.getElementById('class-details-' + i);
+                if(el) el.style.display = 'none';
+            }
+            var showEl = document.getElementById('class-details-' + classNum);
+            if(showEl) {
+                showEl.style.display = 'block';
+                showEl.scrollIntoView({behavior: 'smooth', block: 'center'});
+            }
+        }
+        function closeDetails(classNum) {
+            var el = document.getElementById('class-details-' + classNum);
+            if(el) el.style.display = 'none';
+        }
+    </script><!DOCTYPE html>
+<html>
+<head>
+  <title>Online Attendance</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .submit-btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Online Attendance Form</h2>
+
+  <label for="class">Select Class:</label>
+  <select id="class">
+<option value="Class 6">Class 6</option>
+<option value="Class 7">Class 7</option>
+<option value="Class 8">Class 8</option>
+<option value="Class 9">Class 9</option>
+    <option value="Class 10">Class 10</option>
+    <option value="Class 11">Class 11</option>
+    <option value="Class 12">Class 12</option>
+  </select>
+
+  <form id="attendanceForm">
+    <table id="attendanceTable">
+      <thead>
+        <tr>
+          <th>Roll No</th>
+          <th>Present</th>
+        </tr>
+      </thead>
+        <!-- Student rows will be inserted here -->
+      </tbody>
+    </table>
+
+    <button type="submit" class="submit-btn">Submit Attendance</button>
+  </form>
+
+  <script>
+    // Sample roll numbers (you can load dynamically based on class)
+    const students = Array.from({ length: 10 }, (_, i) => i + 1); // Roll no 1 to 10
+
+    const studentList = document.getElementById("studentList");
+
+    students.forEach(rollNo => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${rollNo}</td>
+        <td><input type="checkbox" name="attendance" value="${rollNo}" /></td>
+      `;
+      studentList.appendChild(row);
+    });
+
+    document.getElementById("attendanceForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const selectedClass = document.getElementById("class").value;
+      const presentRollNos = Array.from(document.querySelectorAll("input[name='attendance']:checked"))
+                                  .map(checkbox => checkbox.value);
+
+      console.log("Class:", selectedClass);
+      console.log("Present Students:", presentRollNos);
+
+      alert(`Attendance submitted for ${selectedClass}.\nPresent Roll Nos: ${presentRollNos.join(", ")}`);
+
+
+
+  </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>School Annual Calendar 2025-2026</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .month {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .month h2 {
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 0;
+      margin: 0 0 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .holiday {
+      color: red;
+      font-weight: bold;
+    }
+
+    .exam {
+      color: blue;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>School Annual Calendar 2025-2026</h1>
+
+  <div class="calendar">
+    
+    <!-- Example Month: August -->
+    <div class="month">
+      <h2>August 2025</h2>
+      <ul>
+        <li>15 Aug – <span class="holiday">Independence Day (Holiday)</span></li>
+        <li>26 Aug – <span class="exam">First Unit Test Begins</span></li>
+      </ul>
+    </div>
+
+    <!-- September -->
+    <div class="month">
+      <h2>September 2025</h2>
+      <ul>
+        <li>05 Sep – Teachers' Day</li>
+        <li>10 Sep – <span class="exam">First Unit Test Ends</span></li>
+        <li>19 Sep – <span class="holiday">Ganesh Chaturthi (Holiday)</span></li>
+      </ul>
+    </div>
+
+    <!-- October -->
+    <div class="month">
+      <h2>October 2025</h2>
+      <ul>
+        <li>02 Oct – <span class="holiday">Gandhi Jayanti (Holiday)</span></li>
+        <li>20 Oct – <span class="exam">Mid-Term Exams Begin</span></li>
+        <li>31 Oct – <span class="exam">Mid-Term Exams End</span></li>
+      </ul>
+    </div>
+
+    <!-- November -->
+    <div class="month">
+      <h2>November 2025</h2>
+      <ul>
+        <li>01 Nov – Karnataka Rajyotsava</li>
+        <li>12 Nov – <span class="holiday">Diwali (Holiday)</span></li>
+      </ul>
+    </div>
+
+    <!-- December -->
+    <div class="month">
+      <h2>December 2025</h2>
+      <ul>
+        <li>24 Dec – <span class="exam">Second Unit Test Begins</span></li>
+        <li>25 Dec – <span class="holiday">Christmas (Holiday)</span></li>
+      </ul>
+    </div>
+
+    <!-- January -->
+    <div class="month">
+      <h2>January 2026</h2>
+      <ul>
+        <li>01 Jan – New Year</li>
+        <li>12 Jan – <span class="exam">Second Unit Test Ends</span></li>
+        <li>26 Jan – <span class="holiday">Republic Day (Holiday)</span></li>
+      </ul>
+    </div>
+
+    <!-- February -->
+    <div class="month">
+      <h2>February 2026</h2>
+      <ul>
+        <li>No major events</li>
+      </ul>
+    </div>
+
+    <!-- March -->
+    <div class="month">
+      <h2>March 2026</h2>
+      <ul>
+        <li>01 Mar – <span class="exam">Final Exams Begin</span></li>
+        <li>20 Mar – <span class="exam">Final Exams End</span></li>
+        <li>25 Mar – <span class="holiday">Holi (Holiday)</span></li>
+      </ul>
+    </div>
+
+    <!-- April -->
+    <div class="month">
+      <h2>April 2026</h2>
+      <ul>
+        <li>01 Apr – New Academic Year Preparation</li>
+        <li>14 Apr – <span class="holiday">Ambedkar Jayanti (Holiday)</span></li>
+      </ul>
+    </div>
+    
+  </div>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>School Assignment Submission</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      color: #333;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      max-width: 500px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Assignment Submission Form</h2>
+  
+  <form action="submit_assignment.php" method="POST" enctype="multipart/form-data">
+    <label for="studentName">Student Name:</label>
+    <input type="text" id="studentName" name="studentName" required>
+
+    <label for="studentId">Student ID:</label>
+    <input type="text" id="studentId" name="studentId" required>
+
+    <label for="class">Class/Grade:</label>
+    <input type="text" id="class" name="class" required>
+
+    <label for="assignmentTitle">Assignment Title:</label>
+    <input type="text" id="assignmentTitle" name="assignmentTitle" required>
+
+    <label for="assignmentFile">Upload Assignment (PDF, DOCX, etc.):</label>
+    <input type="file" id="assignmentFile" name="assignmentFile" accept=".pdf,.doc,.docx,.txt" required>
+
+    <button type="submit">Submit Assignment</button>
+  </form>
+  <footer>
+        &copy; Aviskari Nexus classroom for rural collages | Designed for Rural Colleges
+    </footer>
+
+</body>
+</html>
+
+</body>
+</html>
+</body>
+</html

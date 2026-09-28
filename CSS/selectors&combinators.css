@@ -1,0 +1,99 @@
+*{
+    font-family: "Courier New";
+
+}
+h1, h3{
+    color: #b92b27
+}
+#login {
+    background-color: aquamarine;
+}
+#signup {
+    background-color:bisque;
+}
+.upvote{
+    background-color: blueviolet;
+    color: blanchedalmond;
+}
+p a {
+    color: cadetblue;
+    background-color: burlywood;
+}
+p + h3 {
+    text-decoration:underline ;
+}
+.upvote + button {
+    background-color: lightblue;
+}
+div > input {
+    background-color: rgb(16, 238, 227);
+}
+
+input[type="text"]{
+     color:red;
+}
+
+input[type="password"]{
+    color: green;
+}
+
+
+/* Pseudo Class - A Keyword added to a selector that specifies a special state of the selected elements          */
+button:hover{
+    background-color: black;
+    color:white;
+}
+
+h3:hover{
+    text-decoration: overline;
+}
+
+button:hover{
+    background-color: hotpink;
+    color: black;
+}
+
+p:active{
+    font-weight: bold;
+    color: green;
+}
+
+input[type="radio"]:checked+label{
+    color: red;
+    font-weight: bold;
+}
+
+.post:nth-of-type(2) {
+    background-color: blanchedalmond;
+}
+
+/* Pseudo Element - A Keyword added to a selector that lets you style a specific part of the selected elements.*/
+
+h1::first-letter{
+    color: green;
+}
+p::first-line{
+    color: blue;
+}
+
+p::selection{
+    background-color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+h1{
+    text-align: right;
+    text-decoration: red underline;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+h3{
+    text-align: left;
+}
+p{
+    text-align: right;
+    font-weight: 200;
+    text-decoration: wavy blue overline;
+    line-height: 2;
+    letter-spacing: 6px;
+    font-size: 15px;
+    font-family: Arial;
+
+}
+h2 {
+    font-weight: 100;
+    text-decoration: red underline;
+}
