@@ -1,3 +1,2 @@
-let cars = [ "audi", "bmw", "xuv", "maruti" ]
-cars.push("toyota");
-console.log(cars);
+let game = [['X', null, 'O'], [null, 'X', null], ['O', null, 'X']];
+console.log(game);
