@@ -27,3 +27,37 @@ function concate(str){
     }
     return result;
 }
+
+let name = "saurabh";
+let sum = function(a,b){
+    return a+b;
+}
+let hello = function(){
+    console.log("hello");
+}
+
+let odd = function(n){
+    console.log(!(n%2 == 0));
+}
+let even = function(n){
+    console.log(n%2 == 0);
+
+}
+
+function OddEven(request){
+    if(request == "Odd"){
+        let odd = function(n){
+            console.log(!(n%2 == 0));
+        }
+        return odd;
+    }else if(request == "Even"){
+        let even = function(n){
+            console.log (n%2 == 0);
+        }
+        return even;
+    }else {
+        console.log("wrong request");
+    }
+}
+let request = "odd";
+
