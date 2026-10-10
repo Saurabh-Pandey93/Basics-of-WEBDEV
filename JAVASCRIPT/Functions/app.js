@@ -61,3 +61,34 @@ function OddEven(request){
 }
 let request = "odd";
 
+const student = {
+    name : "Saurabh",
+    age : 21,
+    eng : 95,
+    math : 93,
+    hindi : 99,
+    getAvg(){
+        let avg = (this.eng + this.math + this.hindi)/3;
+        console.log(avg);
+    }
+}
+
+
+console.log("hello");
+
+console.log("hello");
+
+console.log("hello");
+
+console.log("hello2");
+try{
+    console.log(a);
+}catch{
+    console.log("caught an error ... a is not defined");
+}
+
+console.log("hello33");
+
+console.log("hello5");
+
+console.log("hello3");
