@@ -64,3 +64,13 @@ const student = {
     },2000);
    },
 };
+
+
+
+// Map function - let newArr = arr.map(some function definition or name)
+
+let num = [1,2,3,4];
+
+let double = num.map((el) => {
+    return el*2;
+});
